@@ -1,0 +1,35 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+  - file: about-me
+  - file: prereqs
+    sections:
+    - file: intro-gee
+    - file: environment-setup
+  - file: chapter-1
+    sections:
+    - file: Rendering Maps 1
+    - file: Rendering Maps 2
+    - file: Rendering Maps 3
+  - file: RGB-NIR-Composites
+  # - file: Clearing Clouds
+  - file: notebooks
+
+
+# parts:
+#   - caption: About the Author
+#     chapters:
+#     - file: about
+#   # - caption: About Google Earth Engine
+#   # - caption: Environment Setup
+#   - caption: Basic Satellite Data Visualisation
+#     chapters:
+#     - file: RGB-NIR-Composites
+    # - file: Features
+  # - caption: Clouds
+  # # - caption: Features
+  # - caption: Time Series
+  # - caption: Applied Machine Learning
