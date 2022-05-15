@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Method 1: Rendering a static map &#8212; Remote Sensing with Google Earth Engine and Python</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Method 2: Rendering an interactive map" href="Rendering%20Maps%202.html" />
+    <link rel="prev" title="Chapter 1: Rendering a Map on Jupyter Notebook" href="chapter-1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Remote Sensing with Google Earth Engine and Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about-me.html">
+   About the Author
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="prereqs.html">
+   Pre-requisites
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="intro-gee.html">
+     Introduction to Google Earth Engine
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="environment-setup.html">
+     Environment Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="chapter-1.html">
+   Chapter 1: Rendering a Map on Jupyter Notebook
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Method 1: Rendering a static map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Rendering%20Maps%202.html">
+     Method 2: Rendering an interactive map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Rendering%20Maps%203.html">
+     Summary and Footnotes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="RGB-NIR-Composites.html">
+   Chapter 2: Understanding True Colour and False Colour Composites
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/Rendering Maps 1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FRendering Maps 1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Rendering Maps 1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complete-code">
+   Complete Code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#walkthrough">
+   Walkthrough
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output">
+   Output
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Method 1: Rendering a static map</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complete-code">
+   Complete Code
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#walkthrough">
+   Walkthrough
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output">
+   Output
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="method-1-rendering-a-static-map">
+<h1>Method 1: Rendering a static map<a class="headerlink" href="#method-1-rendering-a-static-map" title="Permalink to this headline">¶</a></h1>
+<p>In this exercise, we’ll render a static map of the land surface temperature of the Philippines in 2021 using the MODIS Terra Land Surface Temperature dataset in Google Earth Engine.</p>
+<div class="section" id="complete-code">
+<h2>Complete Code<a class="headerlink" href="#complete-code" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_hide_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ee</span>
+<span class="kn">import</span> <span class="nn">geehydro</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># ee.Authenticate() # remove comment on initial run</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+
+<span class="n">poi</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Point</span><span class="p">([</span><span class="mf">122.1247</span><span class="p">,</span> <span class="mf">13.2735</span><span class="p">])</span> <span class="c1"># [long, lat]</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">poi</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="mf">9.2e5</span><span class="p">)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/006/MOD11A1&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;LST_Day_1km&#39;</span><span class="p">)</span>
+<span class="n">date_filter</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2022-01-01&#39;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">date_filter</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="mf">273.15</span><span class="p">)</span>
+<span class="n">visualisation_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">620</span><span class="p">,</span>
+    <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">roi</span><span class="p">,</span>
+    <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">(</span><span class="n">visualisation_params</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*** Earth Engine *** Authenticate calls from this Earth Engine Python client will fail after 2022-05-09: please upgrade. https://developers.google.com/earth-engine/guides/python_install
+</pre></div>
+</div>
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/thumbnails/1e9285944c60013b149c610b9d2c9b12-c5932f23899d240eedb3afb3a30cdfc2:getPixels"/></div></div>
+</div>
+</div>
+<div class="section" id="walkthrough">
+<h2>Walkthrough<a class="headerlink" href="#walkthrough" title="Permalink to this headline">¶</a></h2>
+<p>First, let’s identify the point on earth that we want to visualise. I’ve chosen coordinates that center to the Philippines. We use <code class="docutils literal notranslate"><span class="pre">ee.Geometry.Point</span></code> to specify a point in the earth using a [longitude, latitude] pair.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poi</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Point</span><span class="p">([</span><span class="mf">122.1247</span><span class="p">,</span> <span class="mf">13.2735</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>More info: Footnote 1.1.</strong> Where to get location coordinates</p>
+</div></blockquote>
+<p>A point alone would not be able to show us an entire country. So, we’ll need to “zoom out” of that point using a buffer, which expands the geometry by the given distance in meters (by default). In our example, let’s zoom out to a radius of 9.2 x 10^5 meters (or 920 km) from the point of interest. You can adjust this buffer by as much as you like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roi</span> <span class="o">=</span> <span class="n">poi</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="mf">9.2e5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>More info: Footnote 1.2.</strong> Geometry.Point buffer</p>
+</div></blockquote>
+<p>Now that we’ve established the region that we want to see, let’s grab some satellite data from the Google Earth Engine datasets. In this example, I’ll use a dataset from a satellite called MODIS, which provides an Image Collection of Global Land Surface Temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/006/MOD11A1&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;LST_Day_1km&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>More info: Footnote 1.3.</strong> Information about the MODIS dataset</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>More info: Footnote 1.4.</strong> Google Earth Engine Images, Features, ImageCollections, and FeatureCollections</p>
+</div></blockquote>
+<p>We can filter the ImageCollection by a range of dates. Let’s say we want to get the land surface temperature of the Philippines in the year 2021. We use the <code class="docutils literal notranslate"><span class="pre">ee.Filter</span></code> object to define a date filter, and then pass this to the <code class="docutils literal notranslate"><span class="pre">filter()</span></code> function of <code class="docutils literal notranslate"><span class="pre">dataset</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">date_filter</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2022-01-01&#39;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">date_filter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first date parameter is the initial date of observation (inclusive), while the second date parameter is the day after the last day of observation. This filter gives us the whole range of dates in the year 2021.</p>
+<p>We’re still left with a bunch of images from the dataset. By default, these images are sorted by date, and they are stacked on top of each other, the latest image being at the top of the stack. This is called a mosaic. We want an image that could show us the average (or sometimes, the median) of all these images. This combination of images is called a composite, and this is one of the most useful ways we can visualise a collection of raster data over date ranges.</p>
+<p>In this example, we’ll create the composite image of the Philippines’ 2021 Land Surface Temperature by calculating the mean of the overlapping pixels of its images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="mf">273.15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second line in the above code snippet looks like an arbitrary transformation, but fear not. There is an explanation to it by looking back at the <a class="reference external" href="https://developers.google.com/earth-engine/datasets/catalog/MODIS_006_MOD11A1#bands">dataset description</a>, a portion of which is below. Under the Scale column, you’ll find the value 0.02. This means that in order to render the <code class="docutils literal notranslate"><span class="pre">LST_Day_1km</span></code> band in a 256x256 pixel image, we need to scale it by 0.02 (thus, image.multiply(0.02)). Next, under the Units column, notice that the temperature data is provided in Kelvin, which is not normally used in everyday conversation. We can convert this to a more familiar measurement unit like Celsius or Fahrenheit. I’ve chosen to convert it to Celsius through add(-273.15).</p>
+<div class="figure align-default" id="lstday1-screenshot">
+<img alt="_images/lstday1-screenshot.png" src="_images/lstday1-screenshot.png" />
+</div>
+<blockquote>
+<div><p>More info: Footnote 1.5. How images are scaled in Google Earth Engine</p>
+</div></blockquote>
+<p>The last part of the code is setting up the visualisation parameters. These specify what ranges of the temperature data we want to visualise, what colours to use, and what the size of the final image will be.</p>
+<div class="cell tag_hide_output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visualisation_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">620</span><span class="p">,</span>
+    <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">roi</span><span class="p">,</span>
+    <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">(</span><span class="n">visualisation_params</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/thumbnails/1e9285944c60013b149c610b9d2c9b12-9c93dca87718c33c5b7780ce6954cbad:getPixels"/></div></div>
+</div>
+<p>Let’s put a bit more detail into the <code class="docutils literal notranslate"><span class="pre">visualisation_params</span></code> variable:</p>
+<ul class="simple">
+<li><p>min: the minimum temperature value that we want to visualise in the region</p></li>
+<li><p>max: the maximum temperature value that we want to visualise in the region</p></li>
+<li><p>dimensions: the size (in pixels) of the output image</p></li>
+<li><p>region: the region that we want to apply the visualisation to</p></li>
+<li><p>palette: the colours that we want to use to indicate the different temperature levels</p></li>
+</ul>
+<p>So, given these definitions, setting <code class="docutils literal notranslate"><span class="pre">min:</span> <span class="pre">8</span></code>, <code class="docutils literal notranslate"><span class="pre">max:</span> <span class="pre">40</span></code> and <code class="docutils literal notranslate"><span class="pre">palette:</span> <span class="pre">[‘blue’,</span> <span class="pre">‘yellow’,</span> <span class="pre">‘red’]</span></code> roughly means that areas with temperatures from 8 to around 18 degrees on average will appear bluish, then as temperatures increase, they appear more yellow. When the temperatures are up to around 28 degrees, they start to appear orange (because of the mix of yellow and red), and then as temperatures increase even more until the max temperature of 40 degrees, the areas appear red. See the example of the northern part of the Philippines, wherein the mountainous areas have blue streaks as the mean temperatures there are cooler. The area encompassing Metropolitan Manila is completely red, indicating the hottest temperatures on average.</p>
+</div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_hide_input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ee</span>
+<span class="kn">import</span> <span class="nn">geehydro</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># ee.Authenticate() # remove comment on initial run</span>
+<span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
+
+<span class="n">poi</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Geometry</span><span class="o">.</span><span class="n">Point</span><span class="p">([</span><span class="mf">122.1247</span><span class="p">,</span> <span class="mf">13.2735</span><span class="p">])</span> <span class="c1"># [long, lat]</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">poi</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="mf">9.2e5</span><span class="p">)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/006/MOD11A1&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;LST_Day_1km&#39;</span><span class="p">)</span>
+<span class="n">date_filter</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="s1">&#39;2021-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2022-01-01&#39;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">date_filter</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="mf">273.15</span><span class="p">)</span>
+<span class="n">visualisation_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="mi">620</span><span class="p">,</span>
+    <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="n">roi</span><span class="p">,</span>
+    <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getThumbUrl</span><span class="p">(</span><span class="n">visualisation_params</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://earthengine.googleapis.com/v1alpha/projects/earthengine-legacy/thumbnails/1e9285944c60013b149c610b9d2c9b12-737d2f10a03e4ce0c3c4f02d1e738d29:getPixels"/></div></div>
+</div>
+<p>Mean land surface temperature of the Philippines in 2021 showing temperature ranges from 8 degrees to 40 degrees Celsius. The bluish spots indicate the cooler temperatures in the mountainous regions; Yellow areas correspond to relatively mild temperate regions; Meanwhile, orange to red areas indicate the hottest regions throughout the year. The reddest area is, as expected, the densest city in the country — Metro Manila.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "geospatial"
+        },
+        kernelOptions: {
+            kernelName: "geospatial",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'geospatial'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="chapter-1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Chapter 1: Rendering a Map on Jupyter Notebook</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Rendering%20Maps%202.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Method 2: Rendering an interactive map</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Shiela Sandoval<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
