@@ -25,10 +25,10 @@ chapters:
 #     - file: about
 #   # - caption: About Google Earth Engine
 #   # - caption: Environment Setup
-#   - caption: Basic Satellite Data Visualisation
-#     chapters:
-#     - file: RGB-NIR-Composites
-    # - file: Features
+  # - caption: Basic Satellite Data Visualisation
+  #   chapters:
+  #   - file: RGB-NIR-Composites
+  #   - file: Features
   # - caption: Clouds
   # # - caption: Features
   # - caption: Time Series
